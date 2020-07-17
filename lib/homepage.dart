@@ -42,6 +42,9 @@ class _HomePageState extends State<HomePage> {
       if (win) {
         statement = 'Someone wins!';
         play = false;
+      } else if (!marker.contains('')) {
+        statement = "It's a draw";
+        play = false;
       }
     });
   }
@@ -130,7 +133,8 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: EdgeInsets.all(20),
               child: Text(
-                statement
+                statement,
+                style: TextStyle(fontSize: 20),
               ),
             )
           ],
