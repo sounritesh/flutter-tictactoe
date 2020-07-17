@@ -11,6 +11,7 @@ class _HomePageState extends State<HomePage> {
 
   String statement = '';
   bool win = false;
+  bool play = true;
   _checkWin() {
     setState(() {
       if ((marker[0] == 'X' && marker[1] == 'X' && marker[2] == 'X') || (marker[0] == 'O' && marker[1] == 'O' && marker[2] == 'O')) {
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
 
       if (win) {
         statement = 'Someone wins!';
+        play = false;
       }
     });
   }
@@ -62,8 +64,12 @@ class _HomePageState extends State<HomePage> {
         elevation: 10,
         color: Colors.blueGrey,
         onPressed: () {
-          _checkWin();
-          _changeButtonState(id);
+          if (play) {
+            _checkWin();
+            if (!win) {
+              _changeButtonState(id);
+            }
+          }
         },
       ),
     );
