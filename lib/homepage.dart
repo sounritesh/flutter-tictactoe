@@ -9,9 +9,39 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  String statement = '';
   bool win = false;
   _checkWin() {
-    
+    setState(() {
+      if ((marker[0] == 'X' && marker[1] == 'X' && marker[2] == 'X') || (marker[0] == 'O' && marker[1] == 'O' && marker[2] == 'O')) {
+        win = true;
+      }
+      if ((marker[3] == 'X' && marker[4] == 'X' && marker[5] == 'X') || (marker[3] == 'O' && marker[4] == 'O' && marker[5] == 'O')) {
+        win = true;
+      }
+      if ((marker[6] == 'X' && marker[7] == 'X' && marker[8] == 'X') || (marker[6] == 'O' && marker[7] == 'O' && marker[8] == 'O')) {
+        win = true;
+      }
+      if ((marker[0] == 'X' && marker[3] == 'X' && marker[6] == 'X') || (marker[0] == 'O' && marker[3] == 'O' && marker[6] == 'O')) {
+        win = true;
+      }
+      if ((marker[1] == 'X' && marker[4] == 'X' && marker[7] == 'X') || (marker[1] == 'O' && marker[4] == 'O' && marker[7] == 'O')) {
+        win = true;
+      }
+      if ((marker[2] == 'X' && marker[5] == 'X' && marker[8] == 'X') || (marker[2] == 'O' && marker[5] == 'O' && marker[8] == 'O')) {
+        win = true;
+      }
+      if ((marker[0] == 'X' && marker[4] == 'X' && marker[8] == 'X') || (marker[0] == 'O' && marker[4] == 'O' && marker[8] == 'O')) {
+        win = true;
+      }
+      if ((marker[2] == 'X' && marker[4] == 'X' && marker[6] == 'X') || (marker[2] == 'O' && marker[4] == 'O' && marker[6] == 'O')) {
+        win = true;
+      }
+
+      if (win) {
+        statement = 'Someone wins!';
+      }
+    });
   }
 
   bool _flag = true;
@@ -32,6 +62,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 10,
         color: Colors.blueGrey,
         onPressed: () {
+          _checkWin();
           _changeButtonState(id);
         },
       ),
@@ -39,6 +70,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _changeButtonState(int id) {
+    print(marker.indexOf("", 8));
+    print(marker.contains(""));
     setState(() {
       if (_flag) {
         marker[id] = 'X';
@@ -87,6 +120,12 @@ class _HomePageState extends State<HomePage> {
                 _buildRaisedButton(7),
                 _buildRaisedButton(8),
               ],
+            ),
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Text(
+                statement
+              ),
             )
           ],
         ),
